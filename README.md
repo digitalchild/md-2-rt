@@ -65,20 +65,34 @@ curl -X POST http://localhost:8787/convert \
 # {"success":true,"richText":{"nodeType":"document","data":{},"content":[...]}}
 ```
 
+## Live API
+
+The API is deployed and available at:
+
+**Production endpoint:** https://api.nothingurl.com/convert
+
+Example usage:
+```bash
+curl -X POST https://api.nothingurl.com/convert \
+  -H "Authorization: Bearer f4411eeb-9421-4e6f-9f0a-283155c809b3" \
+  -H "Content-Type: application/json" \
+  -d '{"markdown": "# Hello World\n\nThis is **bold** text."}'
+```
+
 ### Testing Authentication
 
 Test that authentication is working correctly:
 
 ```bash
 # Invalid API key (should return 401 Unauthorized)
-curl -X POST http://localhost:8787/convert \
+curl -X POST https://api.nothingurl.com/convert \
   -H "Authorization: Bearer wrong-key" \
   -H "Content-Type: application/json" \
   -d '{"markdown": "# Test"}'
 
 # Missing markdown field (should return 400 Bad Request)
-curl -X POST http://localhost:8787/convert \
-  -H "Authorization: Bearer your-secure-api-key-here" \
+curl -X POST https://api.nothingurl.com/convert \
+  -H "Authorization: Bearer f4411eeb-9421-4e6f-9f0a-283155c809b3" \
   -H "Content-Type: application/json" \
   -d '{"invalid": "no markdown field"}'
 ```
@@ -155,11 +169,36 @@ npm run deploy
 4. **Test the deployed API**:
 
 ```bash
-curl -X POST https://your-worker-name.your-subdomain.workers.dev/convert \
+curl -X POST https://api.nothingurl.com/convert \
   -H "Authorization: Bearer your-production-api-key" \
   -H "Content-Type: application/json" \
   -d '{"markdown": "# Production Test"}'
 ```
+
+## Integration with n8n
+
+This API works seamlessly with n8n automation workflows:
+
+1. **Add an HTTP Request node** to your n8n workflow
+2. **Configure the request:**
+   - Method: `POST`
+   - URL: `https://api.nothingurl.com/convert`
+   - Authentication: `Generic Credential Type` → `Bearer Auth`
+   - Bearer Token: `f4411eeb-9421-4e6f-9f0a-283155c809b3`
+   - Content Type: `application/json`
+   - Body: `{"markdown": "Your markdown content here"}`
+
+3. **The response** will contain the converted Rich Text in `richText` field:
+   ```json
+   {
+     "success": true,
+     "richText": {
+       "nodeType": "document",
+       "data": {},
+       "content": [...]
+     }
+   }
+   ```
 
 ### Environment Variables
 

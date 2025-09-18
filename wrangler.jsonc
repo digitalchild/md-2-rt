@@ -7,13 +7,17 @@
 	"name": "md-2-rt",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-09-18",
+	"workers_dev": true,
 	"assets": {
 		"binding": "ASSETS",
 		"directory": "./public"
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	"routes": [
+		"api.nothingurl.com/*"
+	]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
