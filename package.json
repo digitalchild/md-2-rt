@@ -7,6 +7,7 @@
 		"cf-typegen": "wrangler types --env-interface CloudflareBindings"
 	},
 	"dependencies": {
+		"@contentful/rich-text-from-markdown": "^16.1.5",
 		"hono": "^4.9.7"
 	},
 	"devDependencies": {
