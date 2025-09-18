@@ -74,7 +74,7 @@ The API is deployed and available at:
 Example usage:
 ```bash
 curl -X POST https://api.nothingurl.com/convert \
-  -H "Authorization: Bearer f4411eeb-9421-4e6f-9f0a-283155c809b3" \
+  -H "Authorization: Bearer YOUR_API_KEY_HERE" \
   -H "Content-Type: application/json" \
   -d '{"markdown": "# Hello World\n\nThis is **bold** text."}'
 ```
@@ -92,7 +92,7 @@ curl -X POST https://api.nothingurl.com/convert \
 
 # Missing markdown field (should return 400 Bad Request)
 curl -X POST https://api.nothingurl.com/convert \
-  -H "Authorization: Bearer f4411eeb-9421-4e6f-9f0a-283155c809b3" \
+  -H "Authorization: Bearer YOUR_API_KEY_HERE" \
   -H "Content-Type: application/json" \
   -d '{"invalid": "no markdown field"}'
 ```
@@ -184,7 +184,7 @@ This API works seamlessly with n8n automation workflows:
    - Method: `POST`
    - URL: `https://api.nothingurl.com/convert`
    - Authentication: `Generic Credential Type` → `Bearer Auth`
-   - Bearer Token: `f4411eeb-9421-4e6f-9f0a-283155c809b3`
+   - Bearer Token: `YOUR_API_KEY_HERE`
    - Content Type: `application/json`
    - Body: `{"markdown": "Your markdown content here"}`
 
